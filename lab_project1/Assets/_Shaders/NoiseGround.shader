@@ -22,6 +22,7 @@ Shader "Custom/NoiseGround"{
         struct appdata{
             float4 vertex : POSITION;
             float3 normal : NORMAL;
+            float4 tangent : TANGENT;
             float2 texcoord : TEXCOORD0;
         };
 
@@ -46,8 +47,24 @@ Shader "Custom/NoiseGround"{
         }
 
         void vert(inout appdata v){
-            float noise = snoise(float3(v.vertex.x + _NoiseOffset.x, v.vertex.y + _NoiseOffset.y, v.vertex.z + _NoiseOffset.z) * _NoiseFrequency) * _NoiseScale;
-            v.vertex.y += noise;
+            float3 v0 = v.vertex.xyz;
+            float3 bitangent = cross(v.normal, v.tangent.xyz); // calculate the bitangent (cross product of normal and tangent
+            float3 v1 = v0 + (v.tangent.xyz * 0.01); // slightly offset to the right
+            float3 v2 = v0 + (bitangent * 0.01); // slightly offset to the front
+            
+            float ns0 = snoise(float3(v0.x + _NoiseOffset.x, v0.y + _NoiseOffset.y, v0.z + _NoiseOffset.z) * _NoiseFrequency) * _NoiseScale;
+            v0.xyz += ((ns0 + 1)/2) * v.normal;
+
+            float ns1 = snoise(float3(v1.x + _NoiseOffset.x, v1.y + _NoiseOffset.y, v1.z + _NoiseOffset.z) * _NoiseFrequency) * _NoiseScale;
+            v1.xyz += ((ns1 + 1)/2) * v.normal;
+
+            float ns2 = snoise(float3(v2.x + _NoiseOffset.x, v2.y + _NoiseOffset.y, v2.z + _NoiseOffset.z) * _NoiseFrequency) * _NoiseScale;
+            v2.xyz += ((ns2 + 1)/2) * v.normal;
+
+            float3 vn = cross(v2-v0, v1-v0); // calculate the normal of the triangle
+
+            v.normal = normalize(-vn);
+            v.vertex.xyz = v0;
         }
 
         void surf (Input IN, inout SurfaceOutputStandard o){
