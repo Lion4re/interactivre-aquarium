@@ -26,12 +26,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Glossiness: 0.5
+    - _Glossiness: 0.675
     - _Metallic: 0
-    - _NoiseFrequency: 1
-    - _NoiseScale: 1
+    - _NoiseFrequency: 3.46
+    - _NoiseScale: 1.16
     - _Tess: 5.8
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.39858016, g: 0.38789603, b: 0.9056604, a: 1}
     - _NoiseOffset: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
