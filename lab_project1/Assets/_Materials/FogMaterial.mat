@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NoisePP
-  m_Shader: {fileID: 4800000, guid: 5797ccee9a179f340b67b370aec9094f, type: 3}
+  m_Name: FogMaterial
+  m_Shader: {fileID: 4800000, guid: 72a0b71ad98c3814889056a86ecbfb8e, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -26,9 +26,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _NoiseFrequency: 4.5
-    - _NoiseScale: 2.5
-    - _NoiseSpeed: 9.3
-    - _PixelOffset: 0.0053
+    - _NoiseFrequency: 1
+    - _NoiseScale: 1
+    - _NoiseSpeed: 1
+    - _PixelOffset: 0.005
     m_Colors: []
   m_BuildTextureStacks: []
